@@ -31,6 +31,7 @@ function getAvatarUrl($email, $nombre, $size = 200) {
 <body>
     <div class="container my-5">
         <h1 class="text-center mb-4">Gestión de Empleados</h1>
+        <p>El Avatar se genera automáticamente vía el servicio de la nube "GRAVATAR", genera el tuyo en la plataforma o el sistema generará uno vía "UI Avatars"</p>
         <div class="text-end mb-3">
             <a href="formulario.php" class="btn btn-primary">Agregar Nuevo Empleado</a>
         </div>

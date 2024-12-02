@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container my-5">
         <h1 class="text-center mb-4"><?= $id ? 'Editar' : 'Agregar' ?> Empleado</h1>
+        <p>El Avatar se genera automáticamente vía el servicio de la nube "GRAVATAR", genera el tuyo en la plataforma o el sistema generará uno vía "UI Avatars"</p>
         <form method="post" class="row g-3">
             <div class="col-md-6">
                 <label for="nombre" class="form-label">Nombre</label>
