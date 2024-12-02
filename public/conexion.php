@@ -1,9 +1,9 @@
 <?php
 $host = 'localhost';
 $port = '5432';
-$dbname = 'empresa';
-$user = 'postgres';
-$password = 'tu_contraseña';
+$dbname = 'dic24udg';
+$user = 'joshua';
+$password = 'KYuEhu2rR28Bw7v1iMj9qlfoQ9Vl1Qly';
 
 try {
     $link = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $user, $password);
