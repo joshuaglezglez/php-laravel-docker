@@ -5,11 +5,18 @@ include 'conexion.php';
 $query = $link->query("SELECT * FROM empleados ORDER BY id ASC");
 $empleados = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Función para obtener el URL de Gravatar
-function getGravatarUrl($email, $size = 100) {
-    $default = "https://via.placeholder.com/$size"; // Placeholder si no tiene Gravatar
-    $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=$size&d=" . urlencode($default);
-    return $grav_url;
+// Función para obtener el URL de Gravatar o un avatar aleatorio
+function getAvatarUrl($email, $nombre, $size = 200) {
+    $grav_url = "https://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?s=$size&d=404"; // Gravatar con código 404 si no existe
+    $headers = @get_headers($grav_url);
+    
+    if ($headers && strpos($headers[0], '200')) {
+        return $grav_url;
+    } else {
+        // Generar un avatar con UI Avatars
+        $nombre_encoded = urlencode($nombre);
+        return "https://ui-avatars.com/api/?name=$nombre_encoded&size=$size&background=random";
+    }
 }
 ?>
 
@@ -31,7 +38,7 @@ function getGravatarUrl($email, $size = 100) {
             <?php foreach ($empleados as $empleado): ?>
                 <div class="col-md-4">
                     <div class="card h-100">
-                        <img src="<?= getGravatarUrl($empleado['email'], 200) ?>" class="card-img-top" alt="Avatar de <?= htmlspecialchars($empleado['nombre']) ?>">
+                        <img src="<?= getAvatarUrl($empleado['email'], $empleado['nombre'], 200) ?>" class="card-img-top" alt="Avatar de <?= htmlspecialchars($empleado['nombre']) ?>">
                         <div class="card-body">
                             <h5 class="card-title"><?= htmlspecialchars($empleado['nombre']) ?></h5>
                             <p class="card-text"><strong>Teléfono:</strong> <?= htmlspecialchars($empleado['telefono']) ?></p>
